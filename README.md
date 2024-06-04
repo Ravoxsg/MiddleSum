@@ -48,7 +48,7 @@ python src/rq3_mean_salient_position.py --dataset <dataset_name> --clean_model_n
 
 ## Citation
 
-If you find our paper or this project helps your research, please kindly consider citing our paper in your publication.
+If you find any of this useful, please kindly consider citing our paper in your publication.
 
 ```
 @article{ravaut2023context,
