@@ -3,7 +3,7 @@
 Once you clone the repo, create a dedicated conda environment with Python 3.8: 
 ```bash
 cd MiddleSum/
-conda create -name middlesum python=3.8.17
+conda create --name middlesum python=3.8.17
 ```
 
 Next activate the environment:
