@@ -16,8 +16,8 @@ Then install all the dependencies:
 pip install -r requirements.txt
 ```
 
-Do not forget to change the values in the src/keys.py file. 
-You need to enter the path to your home working directory, your HuggingFace token and your OpenAI key (if you want to use GPT-3.5).
+**Do not forget to change the values in the *src/keys.py* file**. 
+You need to enter the path to your home **working directory**, your **HuggingFace token** and your **OpenAI key** (if you want to use GPT-3.5).
 
 ## Experiments
 
