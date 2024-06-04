@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default = 42)
 parser.add_argument('--root', type=str, default = root)
-parser.add_argument('--dataset', type=str, default = "govreport",
+parser.add_argument('--dataset', type=str, default = "cnndm",
                     choices = ["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience", "middlesum"])
 parser.add_argument('--subset', type=str, default = "test")
 parser.add_argument('--subset_size', type=int, default = -1)
