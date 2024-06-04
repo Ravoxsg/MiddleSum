@@ -28,7 +28,7 @@ CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset <dataset_name> --
 
 Then, you need to score the generated summaries:
 ```bash
-python src/main.py --dataset <dataset_name> --clean_model_name <llm_name> 
+python src/main.py --dataset <dataset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
 
 To reproduce the analysis in RQ1 (about mapping bigrams in generated summaries to the source): 
@@ -43,7 +43,7 @@ python src/rq2_alignment_sentences.py --dataset <dataset_name> --clean_model_nam
 
 To reproduce the analysis in RQ3 (about checking the correlation between the mean position of salient info and the source): 
 ```bash
-python src/rq3_alignment_sentences.py --dataset <dataset_name> --clean_model_name <llm_name> 
+python src/rq3_mean_salient_position.py --dataset <dataset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
 
 ## Citation
@@ -51,12 +51,11 @@ python src/rq3_alignment_sentences.py --dataset <dataset_name> --clean_model_nam
 If you find our paper or this project helps your research, please kindly consider citing our paper in your publication.
 
 ```
-@misc{ravaut2024context,
-  title={On Context Utilization in Summarization with Large Language Models}, 
-  author={Mathieu Ravaut and Aixin Sun and Nancy F. Chen and Shafiq Joty},
-  year={2024},
-  eprint={2310.10570},
-  archivePrefix={arXiv},
-  primaryClass={cs.CL}
+@article{ravaut2023context,
+  title={On Context Utilization in Summarization with Large Language Models},
+  author={Ravaut, Mathieu and Joty, Shafiq and Sun, Aixin and Chen, Nancy F},
+  journal={arXiv e-prints},
+  pages={arXiv--2310},
+  year={2023}
 }
 ```
