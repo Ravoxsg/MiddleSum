@@ -10,7 +10,7 @@ from scipy.stats import spearmanr
 from nltk.tokenize import word_tokenize, sent_tokenize
 from transformers import AutoTokenizer
 
-from keys import hf_token
+from keys import root, hf_token
 from utils import seed_everything, settle_args, load_data, load_pred
 from rq2_alignment_sentences import align_source_preds
 from evaluation import compute_scores
@@ -19,7 +19,7 @@ from evaluation import compute_scores
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default = 42)
-parser.add_argument('--root', type=str, default = "/data/mathieu")
+parser.add_argument('--root', type=str, default = root)
 parser.add_argument('--dataset', type=str, default = "samsum",
                     choices=["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience"])
 parser.add_argument('--subset', type=str, default = "test")

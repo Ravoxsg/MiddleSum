@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 import time
 
-from keys import mathieu_key
+from keys import root, openai_key
 from utils import seed_everything, settle_args, load_data,  load_pred
 from evaluation import compute_scores
 
@@ -13,7 +13,7 @@ from evaluation import compute_scores
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default = 42)
-parser.add_argument('--root', type=str, default = "/data/mathieu")
+parser.add_argument('--root', type=str, default = root)
 parser.add_argument('--dataset', type=str, default = "samsum",
                     choices = ["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience", "middlesum"])
 parser.add_argument('--subset', type=str, default = "test")
@@ -50,14 +50,13 @@ parser.add_argument('--metric', type=str, default = "rouge-2",
                     "gpt-likert-informativeness", "gpt-likert-quality", "gpt-likert-coherence", "gpt-likert-attributable"])
 parser.add_argument('--openai_model', type=str, default = "gpt-3.5-turbo-0125",
                     choices = ["gpt-3.5-turbo-0125", "gpt-3.5-turbo-instruct", "gpt-4-1106-preview"])
-parser.add_argument('--openai_key', type=str, default = mathieu_key)
+parser.add_argument('--openai_key', type=str, default = openai_key)
 parser.add_argument('--process_empty_summaries', type=bool, default = False)
 parser.add_argument('--compute_scores', type=bool, default = True)
 parser.add_argument('--save_scores', type=bool, default = True)
 parser.add_argument('--bootstrap', type=bool, default = True)
 parser.add_argument('--bootstrap_size', type=int, default = 100)
 parser.add_argument('--bootstrap_rounds', type=int, default = 1000)
-# general stuff
 parser.add_argument('--n_bins', type=int, default = 5)
 
 args = parser.parse_args()

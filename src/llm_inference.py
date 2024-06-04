@@ -10,7 +10,7 @@ import tiktoken
 from tqdm import tqdm
 from nltk.tokenize import word_tokenize
 
-from keys import mathieu_key
+from keys import root, openai_key
 from utils import seed_everything, settle_args, save_pred
 from engine import prepare_model, load_raw_data, prepare_texts, prepare_prompts, prepare_texts_gptlikert
 from engine import run_inference, run_pyramidal_inference, run_incremental_inference
@@ -20,7 +20,7 @@ from evaluation import complete_evaluation
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default = 42)
-parser.add_argument('--root', type=str, default = "/data/mathieu")
+parser.add_argument('--root', type=str, default = root)
 parser.add_argument('--dataset', type=str, default = "govreport",
                     choices = ["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience", "middlesum"])
 parser.add_argument('--subset', type=str, default = "test")
@@ -40,7 +40,7 @@ parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
                                "flan_ul2", "llama_2_7b", "llama_2_13b", "xgen_7b", "mistral_7b",
                                "vicuna_7b_16k", "llama_2_7b_32k",
                                "gpt-3.5-turbo-0125"])
-parser.add_argument('--openai_key', type=str, default = mathieu_key)
+parser.add_argument('--openai_key', type=str, default = openai_key)
 parser.add_argument('--torch_dtype', default = torch.bfloat16, 
                     choices = [torch.float16, torch.bfloat16, torch.float32])
 parser.add_argument('--inference_method', type=str, default = "normal",

@@ -6,13 +6,14 @@ import scipy.stats as stats
 from tqdm import tqdm
 from nltk.tokenize import word_tokenize, sent_tokenize
 
+from keys import root
 from utils import seed_everything, settle_args, load_data, load_pred
 
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default = 42)
-parser.add_argument('--root', type=str, default = "/data/mathieu")
+parser.add_argument('--root', type=str, default = root)
 parser.add_argument('--dataset', type=str, default = "xsum",
                     choices=["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience", "middlesum"])
 parser.add_argument('--subset', type=str, default = "test")

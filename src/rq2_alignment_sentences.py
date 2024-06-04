@@ -10,7 +10,7 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 from rouge_score import rouge_scorer
 from transformers import AutoTokenizer
 
-from keys import hf_token
+from keys import root, hf_token
 from utils import seed_everything, settle_args, load_data, load_pred, get_clean_model_name
 from engine import prepare_texts, prepare_texts_gptlikert
 
@@ -18,7 +18,7 @@ from engine import prepare_texts, prepare_texts_gptlikert
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default = 42)
-parser.add_argument('--root', type=str, default = "/data/mathieu")
+parser.add_argument('--root', type=str, default = root)
 parser.add_argument('--dataset', type=str, default = "xsum",
                     choices=["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience"])
 parser.add_argument('--subset', type=str, default = "test")

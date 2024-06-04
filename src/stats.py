@@ -6,11 +6,10 @@ from tqdm import tqdm
 from nltk.tokenize import word_tokenize, sent_tokenize
 from transformers import AutoTokenizer
 
-from keys import hf_token
+from keys import root, hf_token
 
 
 def main():
-    root = "/data/mathieu"
     subset = "test"
     model_name = "meta-llama/Llama-2-7b-chat-hf"
     model = "llama-2-7b"

@@ -11,7 +11,7 @@ import time
 import torch
 import tiktoken
 
-from keys import mathieu_key
+from keys import root, openai_key
 from utils import seed_everything, settle_args, save_pred, get_clean_control_name
 from engine import prepare_model, load_raw_data, prepare_prompts, run_inference
 from engine_control import filter_n_docs, prepare_control_texts
@@ -21,7 +21,7 @@ from evaluation import complete_evaluation
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default = 42)
-parser.add_argument('--root', type=str, default = "/data/mathieu")
+parser.add_argument('--root', type=str, default = root)
 parser.add_argument('--dataset', type=str, default = "multinews",
                     choices = ["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience"])
 parser.add_argument('--subset', type=str, default = "test")
@@ -47,7 +47,7 @@ parser.add_argument('--oracle_n_words', type=bool, default = False)
 parser.add_argument('--model', type=str, default = "gpt-3.5-turbo-0125",
                     choices=["flan-ul2", "llama-2-7b-chat", "llama-2-13b-chat", "xgen-7b", "mistral-7b",
                             "gpt-3.5-turbo-0125"])
-parser.add_argument('--openai_key', type=str, default = mathieu_key)
+parser.add_argument('--openai_key', type=str, default = openai_key)
 parser.add_argument('--torch_dtype', default = torch.bfloat16, 
                     choices = [torch.float16, torch.bfloat16, torch.float32])
 parser.add_argument('--inference_method', type=str, default = "normal",
