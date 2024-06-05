@@ -25,13 +25,13 @@ First, you need to generate the summaries. 2 consumer grade (24-48GB) GPUs will 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset <dataset_name> --clean_model_name <llm_name> 
 ```
-This will save summaries under *summaries/<dataset>/<partition>/*.
+This will save summaries under *summaries/dataset/partition/*.
 
 Then, you need to score the generated summaries:
 ```bash
 python src/main.py --dataset <dataset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
-This will save scores under *scores/<dataset>/<partition>/*.
+This will save scores under *scores/dataset/partition/*.
 
 To reproduce the analysis in RQ1 (about mapping bigrams in generated summaries to the source): 
 ```bash
