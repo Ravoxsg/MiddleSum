@@ -29,23 +29,23 @@ This will save summaries under *summaries/dataset/subset/*.
 
 Then, you need to score the generated summaries:
 ```bash
-python src/main.py --dataset <dataset_name> --subset <subset_name>  --clean_model_name <llm_name> --metric <metric_name>
+python src/main.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
 This will save scores under *scores/dataset/subset/*.
 
 To reproduce the analysis in RQ1 (about mapping bigrams in generated summaries to the source): 
 ```bash
-python src/rq1_alignment_bigrams.py --dataset <dataset_name> --subset <subset_name>  --clean_model_name <llm_name> 
+python src/rq1_alignment_bigrams.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
 
 To reproduce the analysis in RQ2 (about mapping sentences in generated summaries to the visible source): 
 ```bash
-python src/rq2_alignment_sentences.py --dataset <dataset_name> --subset <subset_name>  --clean_model_name <llm_name> 
+python src/rq2_alignment_sentences.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
 
 To reproduce the analysis in RQ3 (about checking the correlation between the mean position of salient info and the source): 
 ```bash
-python src/rq3_mean_salient_position.py --dataset <dataset_name> --subset <subset_name>  --clean_model_name <llm_name> --metric <metric_name>
+python src/rq3_mean_salient_position.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
 
 ## Citation
