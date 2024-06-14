@@ -33,7 +33,7 @@ python src/main.py --dataset <dataset_name> --subset <subset_name> --clean_model
 ```
 This will save scores under *scores/dataset/subset/*.
 
-Alternatively, you can download the summaries with [this link](https://drive.google.com/file/d/1-k_EFVVg1ynMiNTS0tebsW0ACbXELUNh/view?usp=sharing). 
+Alternatively, you can download the summaries with [this link](https://drive.google.com/file/d/1jfzcMg1EJBNZ3VlTBbxM-TPc40OS6N4j/view?usp=sharing). 
 
 To reproduce the analysis in RQ1 (about mapping bigrams in generated summaries to the source): 
 ```bash
