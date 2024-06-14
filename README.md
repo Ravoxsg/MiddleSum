@@ -23,27 +23,31 @@ You need to enter the path to your home **working directory**, your **HuggingFac
 
 First, you need to generate the summaries. 2 consumer grade (24-48GB) GPUs will be enough:
 ```bash
-CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset <dataset_name> --clean_model_name <llm_name> 
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
+This will save summaries under *summaries/dataset/subset/*.
 
 Then, you need to score the generated summaries:
 ```bash
-python src/main.py --dataset <dataset_name> --clean_model_name <llm_name> --metric <metric_name>
+python src/main.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
+This will save scores under *scores/dataset/subset/*.
+
+Alternatively, you can download the summaries with [this link](https://drive.google.com/file/d/1jfzcMg1EJBNZ3VlTBbxM-TPc40OS6N4j/view?usp=sharing). 
 
 To reproduce the analysis in RQ1 (about mapping bigrams in generated summaries to the source): 
 ```bash
-python src/rq1_alignment_bigrams.py --dataset <dataset_name> --clean_model_name <llm_name> 
+python src/rq1_alignment_bigrams.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
 
 To reproduce the analysis in RQ2 (about mapping sentences in generated summaries to the visible source): 
 ```bash
-python src/rq2_alignment_sentences.py --dataset <dataset_name> --clean_model_name <llm_name> 
+python src/rq2_alignment_sentences.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
 
 To reproduce the analysis in RQ3 (about checking the correlation between the mean position of salient info and the source): 
 ```bash
-python src/rq3_mean_salient_position.py --dataset <dataset_name> --clean_model_name <llm_name> --metric <metric_name>
+python src/rq3_mean_salient_position.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
 
 ## Citation
