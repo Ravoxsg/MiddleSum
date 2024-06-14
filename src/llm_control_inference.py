@@ -35,7 +35,7 @@ parser.add_argument('--instruction_position', type=str, default = "post",
                     choices=["pre", "post"])
 parser.add_argument('--focus_prompt', type=bool, default = False)
 parser.add_argument('--max_control_size', type=int, default = 500)
-parser.add_argument('--control', type=str, default = "filling",
+parser.add_argument('--control', type=str, default = "position",
                     choices = ["default", "shuffle", "position", "filling"])
 parser.add_argument('--n_shuffle_perm', type=int, default = 1) # only for control=shuffle
 parser.add_argument('--control_doc_pos', type=int, default = 0) # only for control=pos
@@ -44,8 +44,8 @@ parser.add_argument('--control_metric', type=str, default = "bertscore")
 parser.add_argument('--control_label', type=str, default = "label", choices=["label", "query"])
 parser.add_argument('--oracle_n_sents', type=bool, default = False)
 parser.add_argument('--oracle_n_words', type=bool, default = False)
-parser.add_argument('--model', type=str, default = "gpt-3.5-turbo-0125",
-                    choices=["flan-ul2", "llama-2-7b-chat", "llama-2-13b-chat", "xgen-7b", "mistral-7b",
+parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
+                    choices=["flan_ul2", "llama_2_7b", "llama_2_13b", "xgen_7b", "mistral_7b",
                             "gpt-3.5-turbo-0125"])
 parser.add_argument('--openai_key', type=str, default = openai_key)
 parser.add_argument('--torch_dtype', default = torch.bfloat16, 
