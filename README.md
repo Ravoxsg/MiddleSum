@@ -21,12 +21,12 @@ You need to enter the path to your home **working directory**, your **HuggingFac
 
 Next, we need to do some small extra data preparation for 2 datasets: Multi-XScience and SummScreen.  
 
-For Multi-XScience, run: 
+For **Multi-XScience**, run: 
 ```bash
 python src/prepare_data/prepare_multixscience.py
 ```
 
-For SummScreen, first download the dataset here: https://github.com/mingdachen/SummScreen.  
+For **SummScreen**, first download the dataset here: https://github.com/mingdachen/SummScreen.  
 Then place it in src/prepare_data/summscreen/.  
 Next, run:
 
