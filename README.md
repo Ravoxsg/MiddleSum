@@ -39,6 +39,9 @@ To build the **MiddleSum** evaluation dataset, please run:
 ```bash
 python src/prepare_data/prepare_middlesum.py
 ```
+For MiddleSum, the code logic adds a "queries" list (on top of the sources, and the labels) which tracks which original dataset each data point comes from.  
+
+The 3 scripts above will save source documents and label summaries under *raw_summaries/dataset_name/subset_name/*
 
 ## Experiments
 
@@ -48,15 +51,15 @@ First, you need to generate the summaries. 2 consumer grade (24-48GB) GPUs will 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
-This will save summaries under *summaries/<dataset_name>/<subset>/*.
+This will save summaries under *summaries/dataset_name/subset_name/*.
 
 Then, you need to score the generated summaries:
 ```bash
 python src/main.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
-This will save scores under *scores/dataset/subset/*.
+This will save scores under *scores/dataset_name/subset_name/*.
 
-Alternatively, you can download the summaries with [this link](https://drive.google.com/file/d/1jfzcMg1EJBNZ3VlTBbxM-TPc40OS6N4j/view?usp=sharing). 
+Alternatively, you can download the summaries with [this link](https://drive.google.com/file/d/1jfzcMg1EJBNZ3VlTBbxM-TPc40OS6N4j/view?usp=sharing). Then place them in *summaries/*
 
 ### Research Questions
 
