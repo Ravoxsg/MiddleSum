@@ -54,7 +54,7 @@ parser.add_argument('--inference_method', type=str, default = "normal",
                     choices = ["normal", "pyramidal"])
 parser.add_argument('--decoding_method', type=str, default = "top_k",
                     choices = ["greedy", "beam_search", "top_k", "top_p", "temperature"])
-parser.add_argument('--enforced_max_length', type=float, default = -1)
+parser.add_argument('--enforced_max_length', type=int, default = -1)
 parser.add_argument('--temperature', type=float, default = 0.3)
 parser.add_argument('--top_k', type=int, default = 50)
 parser.add_argument('--top_p', type=float, default = 0.9)

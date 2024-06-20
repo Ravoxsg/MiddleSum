@@ -42,7 +42,7 @@ parser.add_argument('--inference_method', type=str, default = "normal",
                     choices = ["normal", "pyramidal", "incremental"])
 parser.add_argument('--decoding_method', type=str, default = "top_k",
                     choices = ["greedy", "beam_search", "top_k", "top_p", "temperature"])
-parser.add_argument('--enforced_max_length', type=float, default=-1)  # [-1, 512, 1024, 2048, 4096, 6144, 8192, 10240]
+parser.add_argument('--enforced_max_length', type=int, default=-1)  # [-1, 512, 1024, 2048, 4096, 6144, 8192, 10240]
 parser.add_argument('--alignment_metric', type=str, default = "rouge-1",
                     choices=["rouge-1", "rouge-2", "rouge-l"])
 parser.add_argument('--compute_alignment', type=boolean_string, default = True)
