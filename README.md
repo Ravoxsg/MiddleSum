@@ -76,6 +76,8 @@ To reproduce the analysis in **RQ2**, about mapping sentences in generated summa
 python src/rq2_alignment_sentences.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
 
+In this file, you also have an arg --compute_alignment which controls whether to build and save or load the sentence-level alignments, which can be quite time consuming. These are necessary for all long-input datasets to build the MiddleSum dataset with *src/prepare_data/prepare_middlesum.py*  
+
 To reproduce the analysis in **RQ3**, about checking the correlation between the mean position of salient info and the source: 
 ```bash
 python src/rq3_mean_salient_position.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
