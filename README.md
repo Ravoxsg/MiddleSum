@@ -108,7 +108,7 @@ with **incremental** inference (Figure 5):
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset middlesum --subset test --clean_model_name <llm_name> --inference_method incremental
 ```
 
-To run inference with a truncated input length, for instance on Arxiv with length 2048 (Figure 6):
+To run inference with a **truncated input length**, for instance on Arxiv with length 2048 (Figure 6):
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset arxiv --subset test --clean_model_name <llm_name> --enforced_max_length 2048
 ```
