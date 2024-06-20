@@ -49,7 +49,7 @@ parser.add_argument('--n_words_per_block', type=int, default = 1500)
 parser.add_argument('--max_n_blocks', type=int, default = 8)
 parser.add_argument('--decoding_method', type=str, default = "top_k",
                     choices = ["greedy", "beam_search", "top_k", "top_p", "temperature"])
-parser.add_argument('--enforced_max_length', type=float, default = -1)
+parser.add_argument('--enforced_max_length', type=int, default = -1)
 parser.add_argument('--check_trunc_fraction', type=boolean_string, default = False)
 parser.add_argument('--temperature', type=float, default = 0.3)
 parser.add_argument('--top_k', type=int, default = 50)
