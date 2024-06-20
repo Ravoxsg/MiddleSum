@@ -76,11 +76,12 @@ def load_raw_data(args):
             labels_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_labels_{args.subset_size}.pkl"
             labels = pickle.load(open(labels_path, "rb"))
         elif args.dataset == "middlesum":
-            path = "MiddleSum/middlesum.jsonl"
-            data_points = [json.loads(file) for file in open(path, 'r')]
-            texts = [x["source"]  for x in data_points]
-            labels = [x["label"] for x in data_points]
-            queries = [x["dataset"] for x in data_points]
+            texts_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_texts_{args.subset_size}.pkl"
+            texts = pickle.load(open(texts_path, "rb"))
+            queries_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_queries_{args.subset_size}.pkl"
+            queries = pickle.load(open(queries_path, "rb"))
+            labels_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_labels_{args.subset_size}.pkl"
+            labels = pickle.load(open(labels_path, "rb"))
     p = np.random.permutation(len(labels))
     texts = [texts[x] for x in p[:args.max_size]]
     labels = [labels[x] for x in p[:args.max_size]]

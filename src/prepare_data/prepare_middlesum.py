@@ -2,10 +2,10 @@ import numpy as np
 import argparse
 import pickle
 import os
+import torch
+import random
 from tqdm import tqdm
 from nltk.tokenize import word_tokenize, sent_tokenize
-
-from utils import seed_everything
 
 
 hf_token = "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"
@@ -30,8 +30,7 @@ def main(args):
 
     seed_everything(args)
 
-    train_cats, train_texts, train_labels = [], [], []
-    test_cats, test_texts, test_labels = [], [], []
+    test_queries, test_texts, test_labels = [], [], []
     for i in range(len(args.dataset_names)):
         # load the data
         dataset_name = args.dataset_names[i]
@@ -58,56 +57,40 @@ def main(args):
         # stats on alignment
         sents_bins = absolute_stats(texts, aligned_labels, args)
 
-        # sample data points
-        # minimums = np.array([np.min(x) for x in sents_bins])
-        # idx_1 = np.array([k for k in range(len(minimums)) if minimums[k] == args.min_bin])
-        # idx_2 = np.array([k for k in range(len(minimums)) if minimums[k] > args.min_bin])
-        # print(len(idx_1), len(idx_2))
-        # p1 = np.random.permutation(len(idx_1))
-        # idx_1 = idx_1[p1]
-        # p2 = np.random.permutation(len(idx_2))
-        # idx_2 = idx_2[p2]
-        # sample_size = int(args.sample_sizes[i]/2)
-        # sampled_idx = list(idx_1[:sample_size]) + list(idx_2[:sample_size])
-
         idx = [k for k in range(len(sents_bins)) if np.min(sents_bins[k]) >= args.min_bin]
         idx = np.array(idx)
         print(f"There are {len(idx)} potential data points")
         p = np.random.permutation(len(idx))
         sample_size = args.sample_sizes[i]
-        train_idx = p[sample_size:]
-        test_idx = p[:sample_size]
-        print(f"Splitting into {len(train_idx)} points for training and {len(test_idx)} points for testing")
+        p = p[:sample_size]
+        sampled_idx = idx[p]
+        test_queries += [dataset_name] * len(sampled_idx)
+        test_texts += [texts[x] for x in sampled_idx]
+        test_labels += [labels[x] for x in sampled_idx]
+    print(len(test_queries), len(test_texts), len(test_labels))
 
-        train_cats += [dataset_name] * len(train_idx)
-        train_texts += [texts[x] for x in train_idx]
-        train_labels += [labels[x] for x in train_idx]
-        test_cats += [dataset_name] * len(test_idx)
-        test_texts += [texts[x] for x in test_idx]
-        test_labels += [labels[x] for x in test_idx]
-    print(len(train_cats), len(test_cats))
-
-    size = len(train_texts)
-    folder = f"raw_summaries/MiddleSum/train"
-    os.makedirs(folder, exist_ok=True)
-    cats_path = f"{folder}/train_queries_{size}.pkl"
-    texts_path = f"{folder}/train_texts_{size}.pkl"
-    labels_path = f"{folder}/train_labels_{size}.pkl"
-    pickle.dump(train_cats, open(cats_path, "wb"))
-    pickle.dump(train_texts, open(texts_path, "wb"))
-    pickle.dump(train_labels, open(labels_path, "wb"))
-    print(f"Saved train texts to: {texts_path}")
+    print(test_texts[0][:100])
 
     size = len(test_texts)
     folder = f"raw_summaries/MiddleSum/test"
     os.makedirs(folder, exist_ok=True)
-    cats_path = f"{folder}/test_queries_{size}.pkl"
+    queries_path = f"{folder}/test_queries_{size}.pkl"
     texts_path = f"{folder}/test_texts_{size}.pkl"
     labels_path = f"{folder}/test_labels_{size}.pkl"
-    pickle.dump(test_cats, open(cats_path, "wb"))
+    pickle.dump(test_queries, open(queries_path, "wb"))
     pickle.dump(test_texts, open(texts_path, "wb"))
     pickle.dump(test_labels, open(labels_path, "wb"))
     print(f"Saved test texts to: {texts_path}")
+
+def seed_everything(args):
+    seed = int(args.seed)
+    random.seed(seed)
+    os.environ['PYTHONASSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = True
 
 def absolute_stats(texts, aligned_summaries, args):
     n_bins = 20
