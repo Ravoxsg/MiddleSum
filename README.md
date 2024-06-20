@@ -17,7 +17,22 @@ pip install -r requirements.txt
 ```
 
 **Do not forget to change the values in the *src/keys.py* file**. 
-You need to enter the path to your home **working directory**, your **HuggingFace token** and your **OpenAI key** (if you want to use GPT-3.5).
+You need to enter the path to your home **working directory**, your **HuggingFace token** and your **OpenAI key** (if you want to use GPT-3.5).  
+
+Next, we need to do some small extra data preparation for 2 datasets: Multi-XScience and SummScreen.  
+
+For Multi-XScience, run: 
+```bash
+python src/prepare_data/prepare_multixscience.py
+```
+
+For SummScreen, first download the dataset here: https://github.com/mingdachen/SummScreen
+Then place it in src/prepare_data/summscreen/.  
+Next, run:
+
+```bash
+python src/prepare_data/prepare_summscreen.py
+```
 
 ## Experiments
 
