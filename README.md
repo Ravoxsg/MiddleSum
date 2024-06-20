@@ -41,7 +41,8 @@ python src/prepare_data/prepare_middlesum.py
 ```
 For MiddleSum, the code logic adds a "queries" list (on top of the sources, and the labels) which tracks which original dataset each data point comes from.  
 
-The 3 scripts above will save source documents and label summaries under *raw_summaries/dataset_name/subset_name/*
+The 3 scripts above will save source documents and label summaries under:  
+*raw_summaries/dataset_name/subset_name/*
 
 ## Experiments
 
