@@ -11,7 +11,7 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 from transformers import AutoTokenizer
 
 from keys import root, hf_token
-from utils import seed_everything, settle_args, load_data, load_pred
+from utils import boolean_string, seed_everything, settle_args, load_data, load_pred
 from rq2_alignment_sentences import align_source_preds
 from evaluation import compute_scores
 
@@ -25,14 +25,14 @@ parser.add_argument('--dataset', type=str, default = "samsum",
 parser.add_argument('--subset', type=str, default = "test")
 parser.add_argument('--instruction_position', type=str, default = "post",
                     choices=["pre", "post"])
-parser.add_argument('--focus_prompt', type=bool, default = False)
+parser.add_argument('--focus_prompt', type=boolean_string, default = False)
 parser.add_argument('--max_size', type=int, default = 1000)
 parser.add_argument('--multi_doc_split', type=str, default = "|||||")
-parser.add_argument('--use_control', type=bool, default = False)
-parser.add_argument('--swap_docs', type=bool, default = False)
-parser.add_argument('--oracle_n_sents', type=bool, default = False)
-parser.add_argument('--oracle_n_words', type=bool, default = False)
-parser.add_argument('--check_stats', type=bool, default = False)
+parser.add_argument('--use_control', type=boolean_string, default = False)
+parser.add_argument('--swap_docs', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_sents', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_words', type=boolean_string, default = False)
+parser.add_argument('--check_stats', type=boolean_string, default = False)
 parser.add_argument('--analysis_size', type=int, default = 1000)
 parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
                     choices=["llama_2_7b_base", "llama_2_13b_base",
@@ -44,16 +44,16 @@ parser.add_argument('--inference_method', type=str, default = "normal",
 parser.add_argument('--decoding_method', type=str, default = "top_k",
                     choices = ["greedy", "beam_search", "top_k", "top_p", "temperature"])
 parser.add_argument('--enforced_max_length', type=float, default = -1)  # [-1, 512, 1024, 2048, 4096, 6144, 8192, 10240]
-parser.add_argument('--compute_alignment', type=bool, default = False)
+parser.add_argument('--compute_alignment', type=boolean_string, default = False)
 parser.add_argument('--metric', type=str, default = "rouge-2",
                     choices=["rouge-1", "rouge-2", "rouge-l", "mean-rouge", "bertscore", "moverscore", "bartscore", "a3cu",
                              "supert", "bartscore-source", "summac", "gptscore", "gpt-likert"])
 parser.add_argument('--openai_model', type=str, default = "gpt-3.5-turbo-0125",
                     choices=["gpt-3.5-turbo-0125", "gpt-3.5-turbo-instruct", "gpt-4-1106-preview"])
-parser.add_argument('--process_empty_summaries', type=bool, default = False)
-parser.add_argument('--compute_scores', type=bool, default = False)
-parser.add_argument('--keep_within_window', type=bool, default = True)
-parser.add_argument('--save_scores', type=bool, default = False)
+parser.add_argument('--process_empty_summaries', type=boolean_string, default = False)
+parser.add_argument('--compute_scores', type=boolean_string, default = False)
+parser.add_argument('--keep_within_window', type=boolean_string, default = True)
+parser.add_argument('--save_scores', type=boolean_string, default = False)
 parser.add_argument('--bin_size', type=int, default = 20)
 
 args = parser.parse_args()

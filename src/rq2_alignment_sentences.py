@@ -11,7 +11,7 @@ from rouge_score import rouge_scorer
 from transformers import AutoTokenizer
 
 from keys import root, hf_token
-from utils import seed_everything, settle_args, load_data, load_pred, get_clean_model_name
+from utils import boolean_string, seed_everything, settle_args, load_data, load_pred, get_clean_model_name
 from engine import prepare_texts, prepare_texts_gptlikert
 
 
@@ -24,14 +24,14 @@ parser.add_argument('--dataset', type=str, default = "xsum",
 parser.add_argument('--subset', type=str, default = "test")
 parser.add_argument('--instruction_position', type=str, default = "post",
                     choices=["pre", "post"])
-parser.add_argument('--focus_prompt', type=bool, default = False)
+parser.add_argument('--focus_prompt', type=boolean_string, default = False)
 parser.add_argument('--max_size', type=int, default = 1000)
 parser.add_argument('--multi_doc_split', type=str, default = "|||||")
-parser.add_argument('--use_control', type=bool, default = False)
-parser.add_argument('--swap_docs', type=bool, default = False)
-parser.add_argument('--oracle_n_sents', type=bool, default = False)
-parser.add_argument('--oracle_n_words', type=bool, default = False)
-parser.add_argument('--check_stats', type=bool, default = False)
+parser.add_argument('--use_control', type=boolean_string, default = False)
+parser.add_argument('--swap_docs', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_sents', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_words', type=boolean_string, default = False)
+parser.add_argument('--check_stats', type=boolean_string, default = False)
 parser.add_argument('--analysis_size', type=int, default = 1000)
 parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
                     choices=["llama_2_7b_base", "llama_2_13b_base",
@@ -45,9 +45,9 @@ parser.add_argument('--decoding_method', type=str, default = "top_k",
 parser.add_argument('--enforced_max_length', type=float, default=-1)  # [-1, 512, 1024, 2048, 4096, 6144, 8192, 10240]
 parser.add_argument('--alignment_metric', type=str, default = "rouge-1",
                     choices=["rouge-1", "rouge-2", "rouge-l"])
-parser.add_argument('--compute_alignment', type=bool, default = True)
-parser.add_argument('--summaries_alignment', type=bool, default = True)
-parser.add_argument('--labels_alignment', type=bool, default = False)
+parser.add_argument('--compute_alignment', type=boolean_string, default = True)
+parser.add_argument('--summaries_alignment', type=boolean_string, default = True)
+parser.add_argument('--labels_alignment', type=boolean_string, default = False)
 parser.add_argument('--n_bins', type=int, default = 10)
 
 args = parser.parse_args()

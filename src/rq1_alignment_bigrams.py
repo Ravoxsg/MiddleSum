@@ -7,7 +7,7 @@ from tqdm import tqdm
 from nltk.tokenize import word_tokenize, sent_tokenize
 
 from keys import root
-from utils import seed_everything, settle_args, load_data, load_pred
+from utils import boolean_string, seed_everything, settle_args, load_data, load_pred
 
 
 parser = argparse.ArgumentParser()
@@ -20,20 +20,20 @@ parser.add_argument('--subset', type=str, default = "test")
 parser.add_argument('--subset_size', type=int, default = -1)
 parser.add_argument('--instruction_position', type=str, default = "post",
                     choices=["pre", "post"])
-parser.add_argument('--focus_prompt', type=bool, default = False)
+parser.add_argument('--focus_prompt', type=boolean_string, default = False)
 parser.add_argument('--max_size', type=int, default = 1000)
 parser.add_argument('--multi_doc_split', type=str, default = "|||||")
-parser.add_argument('--use_control', type=bool, default = False)
+parser.add_argument('--use_control', type=boolean_string, default = False)
 parser.add_argument('--control', type=str, default = "default",
                     choices = ["default", "shuffle", "position", "filling"])
-parser.add_argument('--random_baseline', type=bool, default = False) # only for control=default
+parser.add_argument('--random_baseline', type=boolean_string, default = False) # only for control=default
 parser.add_argument('--n_shuffle_perm', type=int, default = 1) # only for control=shuffle
 parser.add_argument('--control_doc_pos', type=int, default = 0) # only for control=pos
 parser.add_argument('--control_label', type=str, default = "label")
-parser.add_argument('--swap_docs', type=bool, default = False)
-parser.add_argument('--oracle_n_sents', type=bool, default = False)
-parser.add_argument('--oracle_n_words', type=bool, default = False)
-parser.add_argument('--check_stats', type=bool, default = False)
+parser.add_argument('--swap_docs', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_sents', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_words', type=boolean_string, default = False)
+parser.add_argument('--check_stats', type=boolean_string, default = False)
 parser.add_argument('--analysis_size', type=int, default = 1000)
 parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
                     choices=["llama_2_7b_base", "llama_2_13b_base",
@@ -46,7 +46,7 @@ parser.add_argument('--decoding_method', type=str, default = "top_k",
                     choices = ["greedy", "beam_search", "top_k", "top_p", "temperature"])
 parser.add_argument('--enforced_max_length', type=float, default = -1) # [-1, 512, 1024, 2048, 4096, 6144, 8192, 10240]
 parser.add_argument('--n_bins', type=int, default = 20)
-parser.add_argument('--statistical_significance', type=bool, default = True)
+parser.add_argument('--statistical_significance', type=boolean_string, default = True)
 
 args = parser.parse_args()
 

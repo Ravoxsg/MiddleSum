@@ -11,7 +11,7 @@ from tqdm import tqdm
 from nltk.tokenize import word_tokenize
 
 from keys import root, openai_key
-from utils import seed_everything, settle_args, save_pred
+from utils import boolean_string, seed_everything, settle_args, save_pred
 from engine import prepare_model, load_raw_data, prepare_texts, prepare_prompts, prepare_texts_gptlikert
 from engine import run_inference, run_pyramidal_inference, run_incremental_inference
 from evaluation import complete_evaluation
@@ -29,12 +29,12 @@ parser.add_argument('--max_size', type=int, default = 1000) # cap subset size to
 parser.add_argument('--multi_doc_split', type=str, default = "|||||")
 parser.add_argument('--instruction_position', type=str, default = "post",
                     choices=["pre", "post"])
-parser.add_argument('--focus_prompt', type=bool, default = False)
-parser.add_argument('--use_control', type=bool, default = False)
+parser.add_argument('--focus_prompt', type=boolean_string, default = False)
+parser.add_argument('--use_control', type=boolean_string, default = False)
 parser.add_argument('--control', type=str, default = "") # controlling the input (e.g, keeping a single salient document) happens in llm_control_inference.py
-parser.add_argument('--swap_docs', type=bool, default = False)
-parser.add_argument('--oracle_n_sents', type=bool, default = False)
-parser.add_argument('--oracle_n_words', type=bool, default = False)
+parser.add_argument('--swap_docs', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_sents', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_words', type=boolean_string, default = False)
 parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
                     choices = ["llama_2_7b_base", "llama_2_13b_base",
                                "flan_ul2", "llama_2_7b", "llama_2_13b", "xgen_7b", "mistral_7b",
@@ -50,14 +50,14 @@ parser.add_argument('--max_n_blocks', type=int, default = 8)
 parser.add_argument('--decoding_method', type=str, default = "top_k",
                     choices = ["greedy", "beam_search", "top_k", "top_p", "temperature"])
 parser.add_argument('--enforced_max_length', type=float, default = -1)
-parser.add_argument('--check_trunc_fraction', type=bool, default = False)
+parser.add_argument('--check_trunc_fraction', type=boolean_string, default = False)
 parser.add_argument('--temperature', type=float, default = 0.3)
 parser.add_argument('--top_k', type=int, default = 50)
 parser.add_argument('--top_p', type=float, default = 0.95)
-parser.add_argument('--print_input', type=bool, default = False)
-parser.add_argument('--print_output', type=bool, default = False)
+parser.add_argument('--print_input', type=boolean_string, default = False)
+parser.add_argument('--print_output', type=boolean_string, default = False)
 parser.add_argument('--metrics', type=list, default = ["rouge-1", "rouge-2", "rouge-l"])
-parser.add_argument('--save', type=bool, default = True)
+parser.add_argument('--save', type=boolean_string, default = True)
 
 args = parser.parse_args()
 

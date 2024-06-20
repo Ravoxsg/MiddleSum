@@ -6,7 +6,7 @@ from tqdm import tqdm
 import time
 
 from keys import root, openai_key
-from utils import seed_everything, settle_args, load_data,  load_pred
+from utils import boolean_string, seed_everything, settle_args, load_data,  load_pred
 from evaluation import compute_scores
 
 
@@ -19,19 +19,19 @@ parser.add_argument('--dataset', type=str, default = "samsum",
 parser.add_argument('--subset', type=str, default = "test")
 parser.add_argument('--instruction_position', type=str, default = "post",
                     choices=["pre", "post"])
-parser.add_argument('--focus_prompt', type=bool, default = False)
+parser.add_argument('--focus_prompt', type=boolean_string, default = False)
 parser.add_argument('--max_size', type=int, default = 1000)
 parser.add_argument('--multi_doc_split', type=str, default = "|||||")
-parser.add_argument('--use_control', type=bool, default = False)
+parser.add_argument('--use_control', type=boolean_string, default = False)
 parser.add_argument('--control', type=str, default = "default",
                     choices = ["default", "shuffle", "position", "filling"])
-parser.add_argument('--random_baseline', type=bool, default = False) # only for control=default
+parser.add_argument('--random_baseline', type=boolean_string, default = False) # only for control=default
 parser.add_argument('--n_shuffle_perm', type=int, default = 0) # only for control=shuffle
 parser.add_argument('--control_doc_pos', type=int, default = 0) # only for control=pos
 parser.add_argument('--control_label', type=str, default = "label")
-parser.add_argument('--swap_docs', type=bool, default = False)
-parser.add_argument('--oracle_n_sents', type=bool, default = False)
-parser.add_argument('--oracle_n_words', type=bool, default = False)
+parser.add_argument('--swap_docs', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_sents', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_words', type=boolean_string, default = False)
 parser.add_argument('--analysis_size', type=int, default = 1000)
 parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
                     choices = ["llama_2_7b_base", "llama_2_13b_base",
@@ -51,10 +51,10 @@ parser.add_argument('--metric', type=str, default = "rouge-2",
 parser.add_argument('--openai_model', type=str, default = "gpt-3.5-turbo-0125",
                     choices = ["gpt-3.5-turbo-0125", "gpt-3.5-turbo-instruct", "gpt-4-1106-preview"])
 parser.add_argument('--openai_key', type=str, default = openai_key)
-parser.add_argument('--process_empty_summaries', type=bool, default = False)
-parser.add_argument('--compute_scores', type=bool, default = True)
-parser.add_argument('--save_scores', type=bool, default = True)
-parser.add_argument('--bootstrap', type=bool, default = True)
+parser.add_argument('--process_empty_summaries', type=boolean_string, default = False)
+parser.add_argument('--compute_scores', type=boolean_string, default = True)
+parser.add_argument('--save_scores', type=boolean_string, default = True)
+parser.add_argument('--bootstrap', type=boolean_string, default = True)
 parser.add_argument('--bootstrap_size', type=int, default = 100)
 parser.add_argument('--bootstrap_rounds', type=int, default = 1000)
 parser.add_argument('--n_bins', type=int, default = 5)

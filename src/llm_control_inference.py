@@ -12,7 +12,7 @@ import torch
 import tiktoken
 
 from keys import root, openai_key
-from utils import seed_everything, settle_args, save_pred, get_clean_control_name
+from utils import boolean_string, seed_everything, settle_args, save_pred, get_clean_control_name
 from engine import prepare_model, load_raw_data, prepare_prompts, run_inference
 from engine_control import filter_n_docs, prepare_control_texts
 from evaluation import complete_evaluation
@@ -26,24 +26,24 @@ parser.add_argument('--dataset', type=str, default = "multinews",
                     choices = ["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govreport", "summscreen", "multinews", "multixscience"])
 parser.add_argument('--subset', type=str, default = "test")
 parser.add_argument('--subset_size', type=int, default = -1)
-parser.add_argument('--random_baseline', type=bool, default = False)
-parser.add_argument('--control_n_docs', type=bool, default = True)
+parser.add_argument('--random_baseline', type=boolean_string, default = False)
+parser.add_argument('--control_n_docs', type=boolean_string, default = True)
 parser.add_argument('--min_n_docs', type=int, default = 5)
 parser.add_argument('--max_size', type=int, default = 100000) # set it > subset_size to keep the whole subset, which we subsample later
 parser.add_argument('--multi_doc_split', type=str, default = "|||||")
 parser.add_argument('--instruction_position', type=str, default = "post",
                     choices=["pre", "post"])
-parser.add_argument('--focus_prompt', type=bool, default = False)
+parser.add_argument('--focus_prompt', type=boolean_string, default = False)
 parser.add_argument('--max_control_size', type=int, default = 500)
 parser.add_argument('--control', type=str, default = "position",
                     choices = ["default", "shuffle", "position", "filling"])
 parser.add_argument('--n_shuffle_perm', type=int, default = 1) # only for control=shuffle
 parser.add_argument('--control_doc_pos', type=int, default = 0) # only for control=pos
-parser.add_argument('--swap_docs', type=bool, default = True) # only for control=pos or control=filling
+parser.add_argument('--swap_docs', type=boolean_string, default = True) # only for control=pos or control=filling
 parser.add_argument('--control_metric', type=str, default = "bertscore")
 parser.add_argument('--control_label', type=str, default = "label", choices=["label", "query"])
-parser.add_argument('--oracle_n_sents', type=bool, default = False)
-parser.add_argument('--oracle_n_words', type=bool, default = False)
+parser.add_argument('--oracle_n_sents', type=boolean_string, default = False)
+parser.add_argument('--oracle_n_words', type=boolean_string, default = False)
 parser.add_argument('--clean_model_name', type=str, default = "llama_2_7b",
                     choices=["flan_ul2", "llama_2_7b", "llama_2_13b", "xgen_7b", "mistral_7b",
                             "gpt-3.5-turbo-0125"])
@@ -58,11 +58,11 @@ parser.add_argument('--enforced_max_length', type=float, default = -1)
 parser.add_argument('--temperature', type=float, default = 0.3)
 parser.add_argument('--top_k', type=int, default = 50)
 parser.add_argument('--top_p', type=float, default = 0.9)
-parser.add_argument('--print_input', type=bool, default = False)
-parser.add_argument('--print_output', type=bool, default = False)
-parser.add_argument('--check_output', type=bool, default = False)
+parser.add_argument('--print_input', type=boolean_string, default = False)
+parser.add_argument('--print_output', type=boolean_string, default = False)
+parser.add_argument('--check_output', type=boolean_string, default = False)
 parser.add_argument('--metrics', type=list, default = ["rouge-1", "rouge-2", "rouge-l"])
-parser.add_argument('--save', type=bool, default = True)
+parser.add_argument('--save', type=boolean_string, default = True)
 
 args = parser.parse_args()
 
