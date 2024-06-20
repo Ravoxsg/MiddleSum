@@ -29,7 +29,7 @@ python src/prepare_data/prepare_multixscience.py
 ```
 
 For **SummScreen**, first download the dataset here: https://github.com/mingdachen/SummScreen.  
-Then place it in src/prepare_data/summscreen/.  
+Then place it in *src/prepare_data/summscreen/*.  
 Next, run:
 ```bash
 python src/prepare_data/prepare_summscreen.py
@@ -41,8 +41,7 @@ python src/prepare_data/prepare_middlesum.py
 ```
 For MiddleSum, the code logic adds a "queries" list (on top of the sources, and the labels) which tracks which original dataset each data point comes from.  
 
-The 3 scripts above will save source documents and label summaries under:  
-*raw_summaries/dataset_name/subset_name/*
+The 3 scripts above will save source documents and label summaries under: *raw_summaries/dataset_name/subset_name/*
 
 ## Experiments
 
@@ -60,7 +59,7 @@ python src/main.py --dataset <dataset_name> --subset <subset_name> --clean_model
 ```
 This will save scores under *scores/dataset_name/subset_name/*.
 
-Alternatively, you can download the summaries with [this link](https://drive.google.com/file/d/1jfzcMg1EJBNZ3VlTBbxM-TPc40OS6N4j/view?usp=sharing). Then place them in *summaries/*
+Alternatively, you can download the summaries with [this link](https://drive.google.com/file/d/1jfzcMg1EJBNZ3VlTBbxM-TPc40OS6N4j/view?usp=sharing). Then place them in *summaries/*.
 
 ### Research Questions
 
