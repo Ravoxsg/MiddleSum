@@ -5,7 +5,6 @@ all_datasets = ["cnndm", "xsum", "reddit", "samsum", "arxiv", "pubmed", "govrepo
 dataset_names = ["CNNDM", "XSum", "Reddit", "SAMSum", "Arxiv", "PubMed", "GovReport", "SummScreen", "MultiNews", "MultiXScience", "MiddleSum"]
 dataset_proper_names = ["ccdv/cnn_dailymail", "xsum", "reddit_tifu", "samsum", "ccdv/arxiv-summarization", "ccdv/pubmed-summarization", "ccdv/govreport-summarization", "_", "multi_news", "_", "_"]
 dataset_versions = ["3.0.0", "default", "long", "samsum", "document", "document", "", "_", "", "_", "_"]
-summarization_types = ["generic", "generic", "generic", "generic", "generic", "generic", "generic", "generic", "generic", "generic", "query"]
 summarization_inputs = ["single", "single", "single", "single", "single", "single", "single", "single", "multi", "multi", "single"]
 text_keys = ["article", "document", "documents", "dialogue", "article", "article", "report", "_", "document", "_", "_"]
 summary_keys = ["highlights", "summary", "tldr", "summary", "abstract", "abstract", "summary", "_", "summary", "_", "_"]

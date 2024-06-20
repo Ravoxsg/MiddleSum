@@ -92,7 +92,7 @@ def main(args):
     # data
     texts, labels = load_raw_data(args)
     queries = [""] * len(labels)
-    if args.summarization_type == "query":
+    if args.dataset == "middlesum":
         (texts, queries) = texts
     print(len(texts), len(queries), len(labels))
     print("\nFirst data point:")
@@ -154,7 +154,7 @@ def main(args):
             print(f"\nSaving only relevant docs from the input...")
             texts_to_save = just_relevant_texts
         pickle.dump(texts_to_save, open(texts_path, "wb"))
-        if args.summarization_type == "query":
+        if args.dataset == "middlesum":
             queries_path = f"{folder}/{args.subset}_queries_{control}_{size}.pkl"
             pickle.dump(queries, open(queries_path, "wb"))
         labels_path = f"{folder}/{args.subset}_labels_{control}_{size}.pkl"

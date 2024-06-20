@@ -29,7 +29,6 @@ def settle_args(args):
     args.dataset_name = dataset_names[index]
     args.dataset_proper_name = dataset_proper_names[index]
     args.dataset_version = dataset_versions[index]
-    args.summarization_type = summarization_types[index]
     args.summarization_input = summarization_inputs[index]
     args.text_key = text_keys[index]
     args.summary_key = summary_keys[index]
@@ -98,7 +97,7 @@ def load_data(args):
     print(f"\nLoading texts from {texts_path}")
     texts = pickle.load(open(texts_path, "rb"))
     
-    if args.summarization_type == "query":
+    if args.dataset == "middlesum":
         queries_path = f"summaries/{args.dataset_name}/{args.subset}/{args.subset}_queries_{args.max_size}.pkl"
         if os.path.isfile(queries_path):
             queries = pickle.load(open(queries_path, "rb"))

@@ -60,7 +60,7 @@ def main(args):
 
     texts, labels = load_data(args)
     queries = [""] * len(texts)
-    if args.summarization_type == "query":
+    if args.dataset == "middlesum":
         (texts, queries) = texts
     summaries = load_pred(args, control=args.use_control)
     texts = texts[:args.analysis_size]

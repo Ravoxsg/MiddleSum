@@ -86,7 +86,7 @@ def load_raw_data(args):
     labels = [labels[x] for x in p[:args.max_size]]
     print("\nFirst data point:")
     print(texts[0][:500] + "\n\n")
-    if args.summarization_type == "query":
+    if args.dataset == "middlesum":
         queries = [queries[x] for x in p[:args.max_size]]
         texts = (texts, queries)
 
@@ -210,29 +210,19 @@ def prepare_prompts(trunc_texts, queries, labels, args):
         # build the instruction
         if args.instruction_position == "post":
             instruction_position = "above"
-            if args.summarization_type == "generic" or args.dataset == "middlesum":
-                instruction = f"Summarize the {instruction_position} text in {length}."
-                if args.swap_docs:
-                    instruction = f"Summarize the {instruction_position} text in {length}. Only pay attention to the relevant document."
-                if args.focus_prompt:
-                    instruction = f"Summarize the {instruction_position} text in {length}. Please also pay attention to the middle section of the input when constructing the summary."
-            else:
-                instruction = f"Query:\n{query}.\nSummarize the {instruction_position} text with regards to the query in {length}."
-                if args.swap_docs:
-                    instruction = f"Query:\n{query}.\nSummarize the {instruction_position} text with regards to the query in {length}. Only pay attention to the relevant document."
+            instruction = f"Summarize the {instruction_position} text in {length}."
+            if args.swap_docs:
+                instruction = f"Summarize the {instruction_position} text in {length}. Only pay attention to the relevant document."
+            if args.focus_prompt:
+                instruction = f"Summarize the {instruction_position} text in {length}. Please also pay attention to the middle section of the input when constructing the summary."
             prompt = f"Read the following text and then summarize it:\n{trunc_text}\n{instruction}\nSummary:"
         else:
             instruction_position = "following"
-            if args.summarization_type == "generic" or args.dataset == "middlesum":
-                instruction = f"Summarize the {instruction_position} text in {length}."
-                if args.swap_docs:
-                    instruction = f"Summarize the {instruction_position} text in {length}. Only pay attention to the relevant document."
-                if args.focus_prompt:
-                    instruction = f"Summarize the {instruction_position} text in {length}. Please also pay attention to the middle section of the input when constructing the summary."
-            else:
-                instruction = f"Summarize the {instruction_position} text with regards to the query in {length}.\nQuery:\n{query}."
-                if args.swap_docs:
-                    instruction = f"Summarize the {instruction_position} text with regards to the query in {length}. Only pay attention to the relevant document.\nQuery:\n{query}."
+            instruction = f"Summarize the {instruction_position} text in {length}."
+            if args.swap_docs:
+                instruction = f"Summarize the {instruction_position} text in {length}. Only pay attention to the relevant document."
+            if args.focus_prompt:
+                instruction = f"Summarize the {instruction_position} text in {length}. Please also pay attention to the middle section of the input when constructing the summary."
             prompt = f"{instruction}\nText:\n{trunc_text}\nSummary:"
         prompts.append(prompt)
 

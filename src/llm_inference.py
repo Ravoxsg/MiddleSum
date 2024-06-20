@@ -84,7 +84,7 @@ def main(args):
     # data
     texts, labels = load_raw_data(args)
     queries = [""] * len(labels)
-    if args.summarization_type == "query":
+    if args.dataset == "middlesum":
         (texts, queries) = texts
     if args.model.startswith("gpt-3.5"):
         encoding = tiktoken.encoding_for_model(args.model)
@@ -138,7 +138,7 @@ def main(args):
         os.makedirs(folder, exist_ok=True)
         texts_path = f"{folder}/{args.subset}_texts_{size}.pkl"
         pickle.dump(texts, open(texts_path, "wb"))
-        if args.summarization_type == "query":
+        if args.dataset == "middlesum":
             queries_path = f"{folder}/{args.subset}_queries_{size}.pkl"
             pickle.dump(queries, open(queries_path, "wb"))
         labels_path = f"{folder}/{args.subset}_labels_{size}.pkl"

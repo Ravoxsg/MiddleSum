@@ -335,19 +335,11 @@ def get_gptlikert_scores(texts, queries, summaries, args):
             print("new length", max_summary_length)
             summary = encoding.decode(ids)
             n_shrink_summary += 1
-        if (args.summarization_type == "generic") or (args.dataset == "middlesum"):
-            prompt = f"{instruction} Let's think step-by-step and just output the score."
-            prompt += f"\nSource:\n{source}"
-            prompt += f"\nInstruction:\nSummarize the above text in {args.n} sentences."
-            prompt += f"\nSummary:\n{summary}"
-            prompt += f"\nYour score:"
-        else:
-            prompt = f"{instruction} Let's think step-by-step and just output the score."
-            prompt += f"\nSource: \n{source}"
-            prompt += f"\nInstruction:\nSummarize the above text with regards to the following query in {args.n} sentences."
-            prompt += f"\nQuery:\n{query}"
-            prompt += f"\nSummary:\n{summary}"
-            prompt += f"\nYour score:"
+        prompt = f"{instruction} Let's think step-by-step and just output the score."
+        prompt += f"\nSource:\n{source}"
+        prompt += f"\nInstruction:\nSummarize the above text in {args.n} sentences."
+        prompt += f"\nSummary:\n{summary}"
+        prompt += f"\nYour score:"
         if "quality" in args.metric or "coherence" in args.metric:
             prompt = f"{instruction} Let's think step-by-step and just output the score."
             prompt += f"\nSummary:\n{summary}"
