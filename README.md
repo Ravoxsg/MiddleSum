@@ -52,7 +52,7 @@ First, you need to generate the summaries. 2 consumer grade (24-48GB) GPUs will 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
-This will save summaries under *summaries/dataset_name/subset_name/*.
+This will save generated summaries (as well as files with the sources and files with the labels) under *summaries/dataset_name/subset_name/*.
 
 Then, you need to score the generated summaries:
 ```bash
