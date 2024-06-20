@@ -28,7 +28,7 @@ parser.add_argument('--subset', type=str, default = "test")
 parser.add_argument('--subset_size', type=int, default = -1)
 parser.add_argument('--random_baseline', type=boolean_string, default = False)
 parser.add_argument('--control_n_docs', type=boolean_string, default = True)
-parser.add_argument('--min_n_docs', type=int, default = 5)
+parser.add_argument('--n_docs', type=int, default = 5)
 parser.add_argument('--max_size', type=int, default = 100000) # set it > subset_size to keep the whole subset, which we subsample later
 parser.add_argument('--multi_doc_split', type=str, default = "|||||")
 parser.add_argument('--instruction_position', type=str, default = "post",

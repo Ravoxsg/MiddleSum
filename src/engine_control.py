@@ -6,8 +6,8 @@ from rouge_score import rouge_scorer
 
 
 def filter_n_docs(texts, queries, labels, args):
-    idx = [i for i in tqdm(range(len(texts))) if len(texts[i].split("|||||")) == args.min_n_docs]
-    print(f"Keeping {len(idx)} MDS data points with enough docs")
+    idx = [i for i in tqdm(range(len(texts))) if len(texts[i].split("|||||")) == args.n_docs]
+    print(f"Keeping {len(idx)} MDS data points with the right number of docs")
     texts = [texts[x] for x in idx]
     queries = [queries[x] for x in idx]
     labels = [labels[x] for x in idx]

@@ -6,6 +6,7 @@ import os
 import tiktoken
 import time
 import openai
+import json
 from nltk.tokenize import word_tokenize, sent_tokenize
 from tqdm import tqdm
 from datasets import load_dataset
@@ -69,20 +70,17 @@ def load_raw_data(args):
             labels = labels[begin:end]
     # datasets not in HuggingFace:
     else:
-        # generic summarization: ["summscreen", "multixscience"]
-        if args.summarization_type == "generic":
+        if args.dataset in ["summscreen", "multixscience"]:
             texts_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_texts_{args.subset_size}.pkl"
             texts = pickle.load(open(texts_path, "rb"))
             labels_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_labels_{args.subset_size}.pkl"
             labels = pickle.load(open(labels_path, "rb"))
-        # query-focused summarization: middlesum, where "query" is the name of the original dataset (e.g, Arxiv)
-        else:
-            texts_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_texts_{args.subset_size}.pkl"
-            texts = pickle.load(open(texts_path, "rb"))
-            queries_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_queries_{args.subset_size}.pkl"
-            queries = pickle.load(open(queries_path, "rb"))
-            labels_path = f"raw_summaries/{args.dataset_name}/{args.subset}/{args.subset}_labels_{args.subset_size}.pkl"
-            labels = pickle.load(open(labels_path, "rb"))
+        elif args.dataset == "middlesum":
+            path = "MiddleSum/middlesum.jsonl"
+            data_points = [json.loads(file) for file in open(path, 'r')]
+            texts = [x["source"]  for x in data_points]
+            labels = [x["label"] for x in data_points]
+            queries = [x["dataset"] for x in data_points]
     p = np.random.permutation(len(labels))
     texts = [texts[x] for x in p[:args.max_size]]
     labels = [labels[x] for x in p[:args.max_size]]

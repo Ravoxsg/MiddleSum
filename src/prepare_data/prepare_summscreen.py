@@ -5,12 +5,12 @@ from tqdm import tqdm
 
 
 val_data = []
-with open("summscreen/SummScreen/ForeverDreaming/fd_dev.json", "r") as f:
+with open("src/prepare_data/summscreen/SummScreen/ForeverDreaming/fd_dev.json", "r") as f:
     for line in f:
         val_data.append(json.loads(line))
 
 test_data = []
-with open("summscreen/SummScreen/ForeverDreaming/fd_test.json", "r") as f:
+with open("src/prepare_data/summscreen/SummScreen/ForeverDreaming/fd_test.json", "r") as f:
     for line in f:
         test_data.append(json.loads(line))
 
@@ -23,8 +23,8 @@ val_texts, val_labels = [], []
 test_texts, test_labels = [], []
 folders = ["fd"]
 for folder in folders:
-    for f in tqdm(os.listdir(f"summscreen/SummScreen_raw/{folder}/")):
-        filename = f"summscreen/SummScreen_raw/{folder}/" + f
+    for f in tqdm(os.listdir(f"src/prepare_data/summscreen/SummScreen_raw/{folder}/")):
+        filename = f"src/prepare_data/summscreen/SummScreen_raw/{folder}/" + f
         data = json.load(open(filename, 'r'))
         text = data["Transcript"]
         text = "\n".join(text)
@@ -43,7 +43,7 @@ texts = [val_texts, test_texts]
 labels = [val_labels, test_labels]
 for i in range(len(sets)):
     subset = sets[i]
-    folder =  f"../../raw_summaries/SummScreen/{subset}/"
+    folder =  f"raw_summaries/SummScreen/{subset}/"
     os.makedirs(folder, exist_ok=True)
     texts_path = f"{folder}/{subset}_texts_{len(texts[i])}.pkl"
     pickle.dump(texts[i], open(texts_path, "wb"))

@@ -24,7 +24,7 @@ for split in splits:
         texts.append(text)
         counts.append(text.count("|||||"))
     print(len(texts), len(labels), np.mean(counts))
-    folder = "../../raw_summaries/MultiXScience/{clean_split}/"
+    folder = f"raw_summaries/MultiXScience/{clean_split}/"
     os.makedirs(folder, exist_ok=True)
     pickle.dump(texts, open(f"{folder}/{clean_split}_texts_{len(texts)}.pkl", "wb"))
     pickle.dump(labels, open(f"{folder}/{clean_split}_labels_{len(texts)}.pkl", "wb"))
