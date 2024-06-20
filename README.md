@@ -26,7 +26,7 @@ For Multi-XScience, run:
 python src/prepare_data/prepare_multixscience.py
 ```
 
-For SummScreen, first download the dataset here: https://github.com/mingdachen/SummScreen
+For SummScreen, first download the dataset here: https://github.com/mingdachen/SummScreen.  
 Then place it in src/prepare_data/summscreen/.  
 Next, run:
 
