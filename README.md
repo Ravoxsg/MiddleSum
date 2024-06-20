@@ -21,6 +21,8 @@ You need to enter the path to your home **working directory**, your **HuggingFac
 
 ## Experiments
 
+### Research Questions
+
 First, you need to generate the summaries. 2 consumer grade (24-48GB) GPUs will be enough:
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
@@ -49,6 +51,8 @@ To reproduce the analysis in RQ3 (about checking the correlation between the mea
 ```bash
 python src/rq3_mean_salient_position.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
+
+### Analysis
 
 ## Citation
 
