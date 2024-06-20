@@ -42,6 +42,8 @@ python src/prepare_data/prepare_middlesum.py
 In order for this script to work, you need to have already saved in *summaries/* files with labels on the whole datasets, as well as to have computed the sentence-level alignments between label sentences, and sentences from the source. Please see the next section for this.  
 For MiddleSum, the code logic adds a "queries" list (on top of the sources, and the labels) which tracks which original dataset each data point comes from.  
 
+If you just want to work on MiddleSum, check the file jsonl file MiddleSum/middlesum.jsonl in this repo. It one dictionary for each data point of the **shuffled** version of MiddleSum, where shuffling was used with the same permutation used prior to running inference with all LLMs.  
+
 The 3 scripts above will save source documents and label summaries under: *raw_summaries/dataset_name/subset_name/*
 
 ## Experiments
