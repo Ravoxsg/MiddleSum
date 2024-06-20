@@ -17,7 +17,22 @@ pip install -r requirements.txt
 ```
 
 **Do not forget to change the values in the *src/keys.py* file**. 
-You need to enter the path to your home **working directory**, your **HuggingFace token** and your **OpenAI key** (if you want to use GPT-3.5).
+You need to enter the path to your home **working directory**, your **HuggingFace token** and your **OpenAI key** (if you want to use GPT-3.5).  
+
+Next, we need to do some small extra data preparation for 2 datasets: Multi-XScience and SummScreen.  
+
+For **Multi-XScience**, run: 
+```bash
+python src/prepare_data/prepare_multixscience.py
+```
+
+For **SummScreen**, first download the dataset here: https://github.com/mingdachen/SummScreen.  
+Then place it in src/prepare_data/summscreen/.  
+Next, run:
+
+```bash
+python src/prepare_data/prepare_summscreen.py
+```
 
 ## Experiments
 
@@ -39,23 +54,49 @@ Alternatively, you can download the summaries with [this link](https://drive.goo
 
 ### Research Questions
 
-To reproduce the analysis in RQ1 (about mapping bigrams in generated summaries to the source): 
+To reproduce the analysis in **RQ1**, about mapping bigrams in generated summaries to the source: 
 ```bash
 python src/rq1_alignment_bigrams.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
 
-To reproduce the analysis in RQ2 (about mapping sentences in generated summaries to the visible source): 
+To reproduce the analysis in **RQ2**, about mapping sentences in generated summaries to the visible source: 
 ```bash
 python src/rq2_alignment_sentences.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> 
 ```
 
-To reproduce the analysis in RQ3 (about checking the correlation between the mean position of salient info and the source): 
+To reproduce the analysis in **RQ3**, about checking the correlation between the mean position of salient info and the source: 
 ```bash
 python src/rq3_mean_salient_position.py --dataset <dataset_name> --subset <subset_name> --clean_model_name <llm_name> --metric <metric_name>
 ```
 
 ### Analysis
 
+To run the control experiment on salient position of **Figure 3**, for instance on Multi-XScience placing the relevant document at position 0: 
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_control_inference.py --dataset multixscience --subset test --control_n_docs True --n_docs 7 --control position --control_doc_pos 0 --swap_docs True --clean_model_name <llm_name>
+```
+
+To run the control experiment of **Table 3** with only the **first and last** documents, for instance on Multi-News: 
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_control_inference.py --dataset multinews --subset test --control_n_docs True --n_docs 5 --control filling --swap_docs False --clean_model_name <llm_name>
+```
+For the same setup but including 3 **random documents between** the first and last ones: 
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_control_inference.py --dataset multinews --subset test --control_n_docs True --n_docs 5 --control filling --swap_docs True --clean_model_name <llm_name>
+```
+
+To run inference on MiddleSum with the **focus prompt**:
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset middlesum --subset test --clean_model_name <llm_name> --focus_prompt True
+```
+with **hierarchical** inference:
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset middlesum --subset test --clean_model_name <llm_name> --inference_method pyramidal
+```
+with **incremental** inference:
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset middlesum --subset test --clean_model_name <llm_name> --inference_method incremental
+```
 
 
 ## Citation
