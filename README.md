@@ -85,19 +85,23 @@ For the same setup but including 3 **random documents between** the first and la
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_control_inference.py --dataset multinews --subset test --control_n_docs True --n_docs 5 --control filling --swap_docs True --clean_model_name <llm_name>
 ```
 
-To run inference on MiddleSum with the **focus prompt**:
+To run inference on MiddleSum with the **focus prompt** (Figure 5):
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset middlesum --subset test --clean_model_name <llm_name> --focus_prompt True
 ```
-with **hierarchical** inference:
+with **hierarchical** inference (Figure 5):
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset middlesum --subset test --clean_model_name <llm_name> --inference_method pyramidal
 ```
-with **incremental** inference:
+with **incremental** inference (Figure 5):
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset middlesum --subset test --clean_model_name <llm_name> --inference_method incremental
 ```
 
+To run inference with a truncated input length, for instance on Arxiv with length 2048 (Figure 6):
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python src/llm_inference.py --dataset arxiv --subset test --clean_model_name <llm_name> --enforced_max_length 2048
+```
 
 ## Citation
 
